@@ -89,6 +89,15 @@
         </plugin>
 	</plugins>
 	-->
+	<plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>             
+            <configuration>    
+                <mainClass>com.sample.boot.Application</mainClass>
+            </configuration>
+        </plugin>
+    </plugins>
 </build>
 	<!-- general Maven resources -->
 </project>

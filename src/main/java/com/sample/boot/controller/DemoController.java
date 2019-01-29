@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class BookstoreController {
+public class DemoController {
 	
 	static Logger log =LoggerFactory.getLogger(BookstoreController.class);
 	
-	@RequestMapping(value = "/recommended")
-	  public String readingList(){
-		log.info("class:BookstoreController;event:readingList First Check-in");
-	    return "Spring in Action (Manning), Cloud Native Java (O'Reilly), Learning Spring Boot (Packt)";
+	@RequestMapping(value = "/hello")
+	  public String sayHello(){
+		log.info("class:DemoController;event:say Hello");
+	    return "Hello !! This is Spring Boot Demo App";
 	  }
 
 }

@@ -1,4 +1,4 @@
-package com.sample.boot.controller;
+package com.bsu.demo.controller;
 
 import java.util.Date;
 
@@ -16,7 +16,6 @@ public class MessageRestController {
 	@RequestMapping("/hello")
     String getMessage(@RequestParam(value = "name") String name) {
         String rsp = "Hi " + name + " : responded on - " + new Date();
-        log.info(rsp);
         return rsp;
     }
 

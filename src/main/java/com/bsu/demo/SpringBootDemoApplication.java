@@ -1,18 +1,17 @@
-package com.sample.boot;
+package com.bsu.demo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @SpringBootApplication
-public class Application {
+public class SpringBootDemoApplication {
 
-	static Logger log =LoggerFactory.getLogger(Application.class);
 	
 	public static void main(String[] args) {
 		log.info("This is spring boot Application");
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(SpringBootDemoApplication.class, args);
 	}
 }

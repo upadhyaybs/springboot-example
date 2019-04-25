@@ -1,4 +1,4 @@
-package com.sample.boot;
+package com.bsu.demo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

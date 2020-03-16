@@ -51,3 +51,19 @@ jobs:
 
           # run tests!
           - run: mvn integration-test
+
+deploy:
+    machine:
+        enabled: true
+    working_directory: ~/circleci-demo-workflows
+    environment:
+      HEROKU_APP_NAME: "spring-demo-app-circle-ci" # define env var $HEROKU_APP
+      HEROKU_API_KEY: "b1b84809-62e5-46bc-a95c-c31dd82f6d38"
+    steps:
+      - checkout
+      - run:
+          name: Setup Heroku
+          command: bash .circleci/setup-heroku.sh # run a script to set up Heroku
+      - run:
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master

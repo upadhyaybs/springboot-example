@@ -45,10 +45,10 @@ jobs:
              name: Build Docker image
              command: docker build -t $DOCKERHUB_LOGIN/spring-boot-demo:1.0.0
           - run:
-            name: Push to DockerHub
-            command: |
-              docker login -u$DOCKERHUB_LOGIN -p$DOCKERHUB_PASSWORD
-              docker push $DOCKERHUB_LOGIN/spring-boot-demo:1.0.0
+              name: Push to DockerHub
+              command: |
+                docker login -u$DOCKERHUB_LOGIN -p$DOCKERHUB_PASSWORD
+                docker push $DOCKERHUB_LOGIN/spring-boot-demo:1.0.0
           - run:
                 name: Setup Heroku
                 command: bash .circleci/setup-heroku.sh # run a script to set up Heroku

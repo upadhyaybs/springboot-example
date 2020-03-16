@@ -3,9 +3,7 @@ version: 2.1
 orbs:
   maven: circleci/maven@0.0.12
 
-workflows:
-  maven_test:
-     jobs:
+jobs:
       build:
         docker:
           # specify the version you desire here

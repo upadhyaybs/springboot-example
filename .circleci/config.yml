@@ -2,10 +2,9 @@ version: 2.1
 
 orbs:
   maven: circleci/maven@0.0.12
+  heroku: circleci/heroku@1.0.1
 
-workflows:
-  maven_test:
-     jobs:
+jobs:
       build:
         docker:
           # specify the version you desire here
@@ -41,3 +40,19 @@ workflows:
 
           # run tests!
           - run: mvn integration-test
+          
+          - run:
+             name: Build Docker image
+             command: docker build -t upadhyaybs/spring-boot-demo:latest
+          - run:
+              name: Push to DockerHub
+              command: |
+                docker login -u$DOCKERHUB_LOGIN -p$DOCKERHUB_PASSWORD
+                docker push $DOCKERHUB_LOGIN/spring-boot-demo:1.0.0
+          - run:
+                name: Setup Heroku
+                command: bash .circleci/setup-heroku.sh # run a script to set up Heroku
+          - run:
+                name: Deploy to Heroku
+                command: |
+                  git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master

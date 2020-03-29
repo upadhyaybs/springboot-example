@@ -55,7 +55,7 @@ pipeline {
     echo "-=- Create Docker image Tag -=-"
     echo "${ORG_NAME}/${APP_NAME}:latest"
     withDockerRegistry(credentialsId: 'docker-login', url: 'https://docker.io') {
-     bat "docker tag ${ORG_NAME}/${APP_NAME} ${ORG_NAME}/${APP_NAME}:latest"
+     bat "docker tag ${ORG_NAME}/${APP_NAME}:latest ${ORG_NAME}/${APP_NAME}:latest"
     }
    }
   }

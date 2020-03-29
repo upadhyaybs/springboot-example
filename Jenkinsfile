@@ -59,17 +59,27 @@ pipeline {
         */
 
 	
-        stage('Push Docker image') {
+        stage('Docker Image Tag') {
             steps {
-                echo "-=- push Docker image -=-"
-		echo "${ORG_NAME}/${APP_NAME}:${APP_VERSION}"
+                echo "-=- Create Docker image Tag -=-"
+		echo "${ORG_NAME}/${APP_NAME}:latest"
                 withDockerRegistry(credentialsId: 'docker-login', url: 'https://docker.io') {
 		    bat "docker tag ${ORG_NAME}/${APP_NAME} ${ORG_NAME}/${APP_NAME}:latest"
+                }
+            }
+        }
+      }
+	
+      stage('Push Docker image') {
+            steps {
+                echo "-=- push Docker image -=-"
+		echo "${ORG_NAME}/${APP_NAME}:latest"
+                withDockerRegistry(credentialsId: 'docker-login', url: 'https://docker.io') {
 		    bat "docker push ${ORG_NAME}/${APP_NAME}:latest"
                 }
             }
         }
-     }
+      }
 
    /*
     post {

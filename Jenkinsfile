@@ -62,8 +62,13 @@ pipeline {
          stage('Dependency vulnerability tests') {
             steps {
                 echo "-=- run dependency vulnerability tests -=-"
-                sh "./gradlew dependency-check:check"
-                dependencyCheckPublisher failedTotalHigh: 2, unstableTotalHigh: 2, failedTotalMedium: 5, unstableTotalMedium: 5
+		 //For Linux/Unix environment uncomment the below line.
+		//sh "./gradlew dependency-check:check"
+		    
+		//Only for Windows environment.Comment the below line if running in Unix/Linux environment.
+                bat "./gradlew dependency-check:check"
+               
+		dependencyCheckPublisher failedTotalHigh: 2, unstableTotalHigh: 2, failedTotalMedium: 5, unstableTotalMedium: 5
             }
         }
 	/*

@@ -34,10 +34,15 @@ pipeline {
                 echo "-=- execute unit tests -=-"
                 sh "./gradlew test"
                 junit 'build/test-results/test/*.xml'
-                jacoco execPattern: 'build/jacoco.exec'
             }
         }
-
+       stage('JaCoCo') {
+            steps {
+                echo "-=- Code Coverage -=-"
+               jacoco()
+            }
+        }
+        
         stage('Build Docker image') {
             steps {
                 echo "-=- build Docker image -=-"

@@ -13,6 +13,7 @@ pipeline {
  }
 
  stages {
+   /*
   stage('Git Checkout') {
    steps {
     echo "-=- Checkout Code -=-"
@@ -49,7 +50,7 @@ pipeline {
    }
   }
 
-
+ 
   stage('Docker Image Tag') {
    steps {
     echo "-=- Create Docker image Tag -=-"
@@ -59,14 +60,14 @@ pipeline {
     }
    }
   }
-
+*/
 
   stage('Push Docker image') {
    steps {
     echo "-=- push Docker image -=-"
     echo "${ORG_NAME}/${APP_NAME}:latest"
     withDockerRegistry(credentialsId: 'docker-login', url: 'https://docker.io') {
-     bat "login -u upadhyaybs -p Wsx@2020 https://docker.io"
+     bat "docker login -u upadhyaybs -p Wsx@2020 https://docker.io"
      bat "docker push ${ORG_NAME}/${APP_NAME}:latest"
     }
    }

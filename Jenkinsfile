@@ -50,7 +50,7 @@ pipeline {
             }
         }
 		
-		/*
+	/*
         stage('Run Docker image') {
             steps {
                 echo "-=- run Docker image -=-"
@@ -62,7 +62,7 @@ pipeline {
          stage('Dependency vulnerability tests') {
             steps {
                 echo "-=- run dependency vulnerability tests -=-"
-                sh "./mvnw dependency-check:check"
+                sh "./gradlew dependency-check:check"
                 dependencyCheckPublisher failedTotalHigh: 2, unstableTotalHigh: 2, failedTotalMedium: 5, unstableTotalMedium: 5
             }
         }

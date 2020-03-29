@@ -44,13 +44,15 @@ pipeline {
                 sh "docker build -t ${ORG_NAME}/${APP_NAME}:${APP_VERSION} -t ${ORG_NAME}/${APP_NAME}:latest ."
             }
         }
-
+		
+		/*
         stage('Run Docker image') {
             steps {
                 echo "-=- run Docker image -=-"
                 sh "docker run --name ${TEST_CONTAINER_NAME} --detach --rm --network ci --expose 6300 --env JAVA_OPTS='-javaagent:/jacocoagent.jar=output=tcpserver,address=*,port=6300' ${ORG_NAME}/${APP_NAME}:latest"
             }
         }
+        */
 
          stage('Dependency vulnerability tests') {
             steps {

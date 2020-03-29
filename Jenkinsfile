@@ -64,8 +64,8 @@ pipeline {
                 echo "-=- push Docker image -=-"
 		echo "${ORG_NAME}/${APP_NAME}:${APP_VERSION}"
                 withDockerRegistry(credentialsId: 'docker-login', url: 'https://registry.hub.docker.com') {
-                    sh "docker push ${ORG_NAME}/${APP_NAME}:${APP_VERSION}"
-                    sh "docker tag ${ORG_NAME}/${APP_NAME}:${APP_VERSION} ${ORG_NAME}/${APP_NAME}:latest"
+                    bat "docker push ${ORG_NAME}/${APP_NAME}:${APP_VERSION}"
+                    bat "docker tag ${ORG_NAME}/${APP_NAME}:${APP_VERSION} ${ORG_NAME}/${APP_NAME}:latest"
                 }
             }
         }

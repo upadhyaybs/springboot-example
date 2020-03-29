@@ -45,8 +45,6 @@ pipeline {
             
         stage('Build Docker image') {
             steps {
-		def dockerHome = tool 'docker-local'
-        	env.PATH = "${dockerHome}/bin:${env.PATH}"
                 echo "-=- build Docker image -=-"
                 sh "docker build -t ${ORG_NAME}/${APP_NAME}:${APP_VERSION} -t ${ORG_NAME}/${APP_NAME}:latest ."
             }

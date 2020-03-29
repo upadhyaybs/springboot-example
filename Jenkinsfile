@@ -45,7 +45,7 @@ pipeline {
   stage('Build Docker image') {
    steps {
     echo "-=- build Docker image -=-"
-    bat "docker build -t ${ORG_NAME}/${APP_NAME}:latest ."
+    bat "docker build -t ${APP_NAME}:${APP_VERSION} ."
    }
   }
 
@@ -53,9 +53,9 @@ pipeline {
   stage('Docker Image Tag') {
    steps {
     echo "-=- Create Docker image Tag -=-"
-    echo "${ORG_NAME}/${APP_NAME}:latest"
+    echo "${ORG_NAME}/${APP_NAME}:${APP_VERSION}"
     withDockerRegistry(credentialsId: 'docker-login', url: 'https://docker.io') {
-     bat "docker tag ${ORG_NAME}/${APP_NAME}:latest ${ORG_NAME}/${APP_NAME}:latest"
+     bat "docker tag ${APP_NAME}:${APP_VERSION} ${ORG_NAME}/${APP_NAME}:latest"
     }
    }
   }

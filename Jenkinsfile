@@ -50,28 +50,16 @@ pipeline {
             }
         }
 		
-	/*
+	
         stage('Run Docker image') {
             steps {
                 echo "-=- run Docker image -=-"
                 sh "docker run --name ${TEST_CONTAINER_NAME} --detach --rm --network ci --expose 6300 --env JAVA_OPTS='-javaagent:/jacocoagent.jar=output=tcpserver,address=*,port=6300' ${ORG_NAME}/${APP_NAME}:latest"
             }
         }
-        */
+        
 
-         stage('Dependency vulnerability tests') {
-            steps {
-                echo "-=- run dependency vulnerability tests -=-"
-		 //For Linux/Unix environment uncomment the below line.
-		//sh "./gradlew dependency-check:check"
-		    
-		//Only for Windows environment.Comment the below line if running in Unix/Linux environment.
-                bat "./gradlew dependency-check:check"
-               
-		dependencyCheckPublisher failedTotalHigh: 2, unstableTotalHigh: 2, failedTotalMedium: 5, unstableTotalMedium: 5
-            }
-        }
-	/*
+	
         stage('Push Docker image') {
             steps {
                 echo "-=- push Docker image -=-"
@@ -81,15 +69,14 @@ pipeline {
                 }
             }
         }
-	*/
-    }
+     }
 
-   /*
+   
     post {
         always {
             echo "-=- remove deployment -=-"
             sh "docker stop ${TEST_CONTAINER_NAME}"
         }
     }
-    */
+    
 }

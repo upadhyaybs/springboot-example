@@ -10,7 +10,7 @@ pipeline {
         APP_CONTEXT_ROOT = "/"
         APP_LISTENING_PORT = "8080"
         //TEST_CONTAINER_NAME = "ci-${APP_NAME}-${BUILD_NUMBER}"
-        DOCKER_HUB = credentials("${ORG_NAME}-docker-hub")
+        //DOCKER_HUB = credentials("${ORG_NAME}-docker-hub")
     }
 
     stages {
@@ -61,7 +61,7 @@ pipeline {
                 dependencyCheckPublisher failedTotalHigh: 2, unstableTotalHigh: 2, failedTotalMedium: 5, unstableTotalMedium: 5
             }
         }
-
+	/*
         stage('Push Docker image') {
             steps {
                 echo "-=- push Docker image -=-"
@@ -71,6 +71,7 @@ pipeline {
                 }
             }
         }
+	*/
     }
 
    /*

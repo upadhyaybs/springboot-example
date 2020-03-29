@@ -25,20 +25,20 @@ pipeline {
         stage('Compile') {
             steps {
                 echo "-=- compiling project -=-"
-                sh "./gradlew clean build"
+                bat "./gradlew clean build"
             }
         }
 
         stage('Unit tests') {
             steps {
                 echo "-=- execute unit tests -=-"
-                sh "./gradlew test"
+                bat "./gradlew test"
                 junit 'build/test-results/test/*.xml'
             }
         }
        stage('JaCoCo') {
             steps {
-                echo "-=- Code Coverage -=-"
+               echo "-=- Code Coverage -=-"
                jacoco()
             }
         }

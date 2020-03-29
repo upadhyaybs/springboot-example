@@ -11,7 +11,7 @@ VOLUME /tmp
 EXPOSE 8080
 
 # The application's jar file
-ARG JAR_FILE=build/libs/spring-boot-demo-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=build/libs/spring-boot-demo-1.0-SNAPSHOT.jar
 
 # Add the application's jar to the container
 ADD ${JAR_FILE} spring-boot-demo.jar

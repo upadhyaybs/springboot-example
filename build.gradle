@@ -11,7 +11,7 @@ plugins {
 }
 
 group = 'com.bsu'
-version = '0.0.1-SNAPSHOT'
+version = '1.0-SNAPSHOT'
 description = 'spring-boot-demo'
 sourceCompatibility = '1.8'
 

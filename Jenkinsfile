@@ -66,6 +66,7 @@ pipeline {
     echo "-=- push Docker image -=-"
     echo "${ORG_NAME}/${APP_NAME}:latest"
     withDockerRegistry(credentialsId: 'docker-login', url: 'https://docker.io') {
+     bat "docker login"
      bat "docker push ${ORG_NAME}/${APP_NAME}:latest"
     }
    }

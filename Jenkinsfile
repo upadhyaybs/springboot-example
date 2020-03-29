@@ -33,7 +33,7 @@ pipeline {
             steps {
                 echo "-=- execute unit tests -=-"
                 sh "./gradlew test"
-                junit 'build/surefire-reports/*.xml'
+                junit 'build/test-results/test/*.xml'
                 jacoco execPattern: 'build/jacoco.exec'
             }
         }

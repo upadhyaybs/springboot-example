@@ -7,6 +7,7 @@ plugins {
     id 'maven-publish'
     id 'org.springframework.boot' version '2.2.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'jacoco'
 }
 
 group = 'com.bsu'
@@ -41,3 +42,9 @@ test {
     useJUnitPlatform()
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}

@@ -45,7 +45,7 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 echo "-=- build Docker image -=-"
-                bat "docker build -t ${ORG_NAME}/${APP_NAME}:${APP_VERSION} ."
+                bat "docker build -t ${ORG_NAME}/${APP_NAME}:latest ."
             }
         }
 		
@@ -64,19 +64,19 @@ pipeline {
                 echo "-=- push Docker image -=-"
 		echo "${ORG_NAME}/${APP_NAME}:${APP_VERSION}"
                 withDockerRegistry(credentialsId: 'docker-login', url: 'https://registry.hub.docker.com') {
-		    bat "docker tag ${ORG_NAME}/${APP_NAME}:${APP_VERSION} ${ORG_NAME}/${APP_NAME}:latest"
-                    bat "docker push ${ORG_NAME}/${APP_NAME}:latest"
+		    bat "docker push ${ORG_NAME}/${APP_NAME}:latest"
                 }
             }
         }
      }
 
-   
+   /*
     post {
         always {
             echo "-=- remove deployment -=-"
-            sh "docker stop ${TEST_CONTAINER_NAME}"
+            bat "docker stop ${TEST_CONTAINER_NAME}"
         }
     }
+    */
     
 }

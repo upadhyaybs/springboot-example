@@ -10,7 +10,6 @@ pipeline {
         APP_CONTEXT_ROOT = "/"
         APP_LISTENING_PORT = "8080"
         TEST_CONTAINER_NAME = "ci-${APP_NAME}-${BUILD_NUMBER}"
-        DOCKER_HUB = credentials("${ORG_NAME}-docker-hub")
     }
 
     stages {
@@ -50,20 +49,21 @@ pipeline {
             }
         }
 		
-	
+	/*
         stage('Run Docker image') {
             steps {
                 echo "-=- run Docker image -=-"
                 sh "docker run --name ${TEST_CONTAINER_NAME} --detach --rm --network ci --expose 6300 --env JAVA_OPTS='-javaagent:/jacocoagent.jar=output=tcpserver,address=*,port=6300' ${ORG_NAME}/${APP_NAME}:latest"
             }
         }
-        
+        */
 
 	
         stage('Push Docker image') {
             steps {
                 echo "-=- push Docker image -=-"
-                withDockerRegistry([ credentialsId: "${ORG_NAME}-docker-hub", url: "" ]) {
+		echo "${ORG_NAME}/${APP_NAME}:${APP_VERSION}"
+                withDockerRegistry(credentialsId: 'docker-login', url: 'https://registry.hub.docker.com') {
                     sh "docker push ${ORG_NAME}/${APP_NAME}:${APP_VERSION}"
                     sh "docker tag ${ORG_NAME}/${APP_NAME}:${APP_VERSION} ${ORG_NAME}/${APP_NAME}:latest"
                 }

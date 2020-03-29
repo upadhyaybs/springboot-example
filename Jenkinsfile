@@ -49,22 +49,13 @@ pipeline {
             }
         }
 		
-	/*
-        stage('Run Docker image') {
-            steps {
-                echo "-=- run Docker image -=-"
-                sh "docker run --name ${TEST_CONTAINER_NAME} --detach --rm --network ci --expose 6300 --env JAVA_OPTS='-javaagent:/jacocoagent.jar=output=tcpserver,address=*,port=6300' ${ORG_NAME}/${APP_NAME}:latest"
-            }
-        }
-        */
-
 	
         stage('Docker Image Tag') {
             steps {
                 echo "-=- Create Docker image Tag -=-"
-		echo "${ORG_NAME}/${APP_NAME}:latest"
+				echo "${ORG_NAME}/${APP_NAME}:latest"
                 withDockerRegistry(credentialsId: 'docker-login', url: 'https://docker.io') {
-		    bat "docker tag ${ORG_NAME}/${APP_NAME} ${ORG_NAME}/${APP_NAME}:latest"
+		    		bat "docker tag ${ORG_NAME}/${APP_NAME} ${ORG_NAME}/${APP_NAME}:latest"
                 }
             }
         }
@@ -73,9 +64,9 @@ pipeline {
       stage('Push Docker image') {
             steps {
                 echo "-=- push Docker image -=-"
-		echo "${ORG_NAME}/${APP_NAME}:latest"
+				echo "${ORG_NAME}/${APP_NAME}:latest"
                 withDockerRegistry(credentialsId: 'docker-login', url: 'https://docker.io') {
-		    bat "docker push ${ORG_NAME}/${APP_NAME}:latest"
+		    		bat "docker push ${ORG_NAME}/${APP_NAME}:latest"
                 }
             }
         }

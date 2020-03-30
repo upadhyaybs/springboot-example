@@ -66,15 +66,16 @@ pipeline {
     script {
      def rtServer = Artifactory.server SERVER_ID
      def rtDocker = Artifactory.docker server: rtServer
+     // Create an Artifactory Docker instance, using your Artifactory username and password:
+     //def rtDocker = Artifactory.docker username: 'admin', password: 'Wsx@2020'
      def buildInfo = Artifactory.newBuildInfo()
      def tagName
      buildInfo.env.capture = true
-     //sh "sed -i 's/docker.artifactory/${ARTDOCKER_REGISTRY}/' Dockerfile"
-     tagName = "${ARTDOCKER_REGISTRY}/docker-framework:${env.BUILD_NUMBER}"
+     tagName = "${ARTDOCKER_REGISTRY}/spring-boot-demo:${env.BUILD_NUMBER}"
      println "Docker Framework Build"
      docker.build(tagName)
      println "Docker pushing -->" + tagName + " To " + REPO
-     buildInfo = rtDocker.push(tagName, REPO, buildInfo)
+     buildInfo = rtDocker.push(tagName, "${REPO}")
      println "Docker Buildinfo"
      rtServer.publishBuildInfo buildInfo
     }

@@ -62,17 +62,28 @@ pipeline {
   }
 */
 
-  stage('Deploy Docker image') {
+  stage('Artifactory configuration') {
    steps {
-    script {
-     def server = Artifactory.server 'docker-login'
-     def rtDocker = Artifactory.docker server: server
-     def buildInfo = rtDocker.push('http://vupadh:8081/artifactory/spring-boot-demo:latest', 'docker-local')
-     //also tried:
-     //def buildInfo = rtDocker.push('registry-url/docker/image:latest', 'docker') 
-     //the above results in registry/docker/docker/image..
-     server.publishBuildInfo buildInfo
-    }
+    // specify Artifactory server
+    rtServer(
+     id: "ARTIFACTORY_SERVER",
+     url: "http://artifactory:8081/artifactory",
+     credentialsId: 'docker-login'
+    )
+    // specify the repositories to be used for deploying the artifacts in the Artifactory
+    rtGradleDeployer(
+     id: "GRADLE_DEPLOYER",
+     serverId: "ARTIFACTORY_SERVER",
+     releaseRepo: "libs-release-local",
+     snapshotRepo: "libs-snapshot-local"
+    )
+    // defines the dependencies resolution details
+    rtGradleResolver(
+     id: "GRADLE_RESOLVER",
+     serverId: "ARTIFACTORY_SERVER",
+     releaseRepo: "libs-release",
+     snapshotRepo: "libs-snapshot"
+    )
    }
   }
  }

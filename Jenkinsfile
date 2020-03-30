@@ -12,8 +12,8 @@ pipeline {
   def rtServer = Artifactory.server SERVER_ID
  def rtDocker = Artifactory.docker server: rtServer
  def buildInfo = Artifactory.newBuildInfo()
- def tagName
- buildInfo.env.capture = true
+ def tagName 
+  //buildInfo.env.capture = true
  }
 
  stages {
@@ -67,7 +67,8 @@ pipeline {
 */
  
   stage('Build') {
-        dir ('spring-boot-demo') {
+   steps{
+        
                 sh "sed -i 's/docker.artifactory/${ARTDOCKER_REGISTRY}/' Dockerfile"
                 tagName = "${ARTDOCKER_REGISTRY}/docker-framework:${env.BUILD_NUMBER}"
                 println "Docker Framework Build"
@@ -77,7 +78,8 @@ pipeline {
                 println "Docker Buildinfo"
                 rtServer.publishBuildInfo buildInfo
 
-        }
+        
     }
+  }
   }
 }

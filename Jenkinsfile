@@ -2,11 +2,6 @@
 
 pipeline {
  agent any
- def rtServer = Artifactory.server SERVER_ID
- def rtDocker = Artifactory.docker server: rtServer
- def buildInfo = Artifactory.newBuildInfo()
- def tagName
- buildInfo.env.capture = true
  environment {
   ORG_NAME = "upadhyaybs"
   APP_NAME = "spring-boot-demo"
@@ -66,9 +61,13 @@ pipeline {
    }
   }
 */
-
+ def rtServer = Artifactory.server SERVER_ID
+ def rtDocker = Artifactory.docker server: rtServer
+ def buildInfo = Artifactory.newBuildInfo()
+ def tagName
+ buildInfo.env.capture = true
   stage('Build') {
-        dir ('docker-framework') {
+        dir ('spring-boot-demo') {
                 sh "sed -i 's/docker.artifactory/${ARTDOCKER_REGISTRY}/' Dockerfile"
                 tagName = "${ARTDOCKER_REGISTRY}/docker-framework:${env.BUILD_NUMBER}"
                 println "Docker Framework Build"

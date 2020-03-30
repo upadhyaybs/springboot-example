@@ -62,16 +62,17 @@ pipeline {
   }
 */
 
-  stage('Push Docker image') {
-   steps {
-    echo "-=- push Docker image -=-"
-    echo "${ORG_NAME}/${APP_NAME}:latest"
-    withDockerRegistry(credentialsId: 'docker-login', url: 'http://vupadh:8081') {
-     bat "docker push ${ORG_NAME}/${APP_NAME}:latest"
-    }
-   }
-  }
- }
-
-
+ stage('Deploy Docker image'){
+            steps {
+                script {
+                    def server = Artifactory.server 'docker-login'
+                    def rtDocker = Artifactory.docker server: server
+                    def buildInfo = rtDocker.push('http://vupadh:8081/artifactory/spring-boot-demo:latest', 'docker-local')
+                    //also tried:
+                    //def buildInfo = rtDocker.push('registry-url/docker/image:latest', 'docker') 
+                    //the above results in registry/docker/docker/image..
+                    server.publishBuildInfo buildInfo
+                }
+            }
+        }
 }

@@ -2,11 +2,7 @@
 
 pipeline {
  agent any
- def rtServer = Artifactory.server SERVER_ID
- def rtDocker = Artifactory.docker server: rtServer
- def buildInfo = Artifactory.newBuildInfo()
- def tagName
- buildInfo.env.capture = true
+
  environment {
   ORG_NAME = "upadhyaybs"
   APP_NAME = "spring-boot-demo"

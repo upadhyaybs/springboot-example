@@ -2,7 +2,11 @@
 
 pipeline {
  agent any
-
+ def rtServer = Artifactory.server SERVER_ID
+ def rtDocker = Artifactory.docker server: rtServer
+ def buildInfo = Artifactory.newBuildInfo()
+ def tagName
+ buildInfo.env.capture = true
  environment {
   ORG_NAME = "upadhyaybs"
   APP_NAME = "spring-boot-demo"
@@ -63,18 +67,18 @@ pipeline {
   }
 */
 
-  stage('Deploy Docker image'){
-            steps {
-                script {
-                    def server = Artifactory.server 'docker-artifactory-server'
-                    def rtDocker = Artifactory.docker server: server
-                    def buildInfo = rtDocker.push('http://vupadh:8081/artifactory/spring-boot-demo:latest', 'docker-local')
-                    //also tried:
-                    //def buildInfo = rtDocker.push('registry-url/docker/image:latest', 'docker') 
-                    //the above results in registry/docker/docker/image..
-                    server.publishBuildInfo buildInfo
-                }
-            }
+  stage('Build') {
+        dir ('docker-framework') {
+                sh "sed -i 's/docker.artifactory/${ARTDOCKER_REGISTRY}/' Dockerfile"
+                tagName = "${ARTDOCKER_REGISTRY}/docker-framework:${env.BUILD_NUMBER}"
+                println "Docker Framework Build"
+                docker.build(tagName)
+                println "Docker pushing -->" + tagName + " To " + REPO
+                buildInfo = rtDocker.push(tagName, REPO, buildInfo)
+                println "Docker Buildinfo"
+                rtServer.publishBuildInfo buildInfo
+
         }
- }
+    }
+  }
 }

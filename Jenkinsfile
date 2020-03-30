@@ -74,14 +74,14 @@ pipeline {
     rtGradleDeployer(
      id: "GRADLE_DEPLOYER",
      serverId: "ARTIFACTORY_SERVER",
-     releaseRepo: "libs-release-local",
+     repo: "libs-release-local",
      snapshotRepo: "libs-snapshot-local"
     )
     // defines the dependencies resolution details
     rtGradleResolver(
      id: "GRADLE_RESOLVER",
      serverId: "ARTIFACTORY_SERVER",
-     releaseRepo: "libs-release",
+     repo: "libs-release",
      snapshotRepo: "libs-snapshot"
     )
    }

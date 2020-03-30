@@ -74,7 +74,7 @@ pipeline {
      tagName = "spring-boot-demo:${env.BUILD_NUMBER}"
      println "Docker Framework Build"
      docker.build(tagName)
-     println "Docker pushing -->" + tagName + " To " + REPO
+     println "Docker pushing -->" + tagName + " To " + "${REPO}"
      buildInfo = rtDocker.push(tagName, "${REPO}")
      println "Docker Buildinfo"
      rtServer.publishBuildInfo buildInfo

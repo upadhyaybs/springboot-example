@@ -71,7 +71,7 @@ pipeline {
      def buildInfo = Artifactory.newBuildInfo()
      def tagName
      buildInfo.env.capture = true
-     tagName = "${ARTDOCKER_REGISTRY}/spring-boot-demo:${env.BUILD_NUMBER}"
+     tagName = "spring-boot-demo:${env.BUILD_NUMBER}"
      println "Docker Framework Build"
      docker.build(tagName)
      println "Docker pushing -->" + tagName + " To " + REPO

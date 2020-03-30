@@ -9,7 +9,11 @@ pipeline {
   APP_CONTEXT_ROOT = "/"
   APP_LISTENING_PORT = "8080"
   TEST_CONTAINER_NAME = "ci-${APP_NAME}-${BUILD_NUMBER}"
-  
+  def rtServer = Artifactory.server SERVER_ID
+ def rtDocker = Artifactory.docker server: rtServer
+ def buildInfo = Artifactory.newBuildInfo()
+ def tagName
+ buildInfo.env.capture = true
  }
 
  stages {
@@ -61,11 +65,7 @@ pipeline {
    }
   }
 */
- def rtServer = Artifactory.server SERVER_ID
- def rtDocker = Artifactory.docker server: rtServer
- def buildInfo = Artifactory.newBuildInfo()
- def tagName
- buildInfo.env.capture = true
+ 
   stage('Build') {
         dir ('spring-boot-demo') {
                 sh "sed -i 's/docker.artifactory/${ARTDOCKER_REGISTRY}/' Dockerfile"

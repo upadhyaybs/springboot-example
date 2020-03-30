@@ -2,7 +2,11 @@
 
 pipeline {
  agent any
-
+ def rtServer = Artifactory.server SERVER_ID
+ def rtDocker = Artifactory.docker server: rtServer
+ def buildInfo = Artifactory.newBuildInfo()
+ def tagName
+ buildInfo.env.capture = true
  environment {
   ORG_NAME = "upadhyaybs"
   APP_NAME = "spring-boot-demo"
@@ -10,6 +14,7 @@ pipeline {
   APP_CONTEXT_ROOT = "/"
   APP_LISTENING_PORT = "8080"
   TEST_CONTAINER_NAME = "ci-${APP_NAME}-${BUILD_NUMBER}"
+  
  }
 
  stages {
@@ -62,29 +67,18 @@ pipeline {
   }
 */
 
-  stage('Artifactory configuration') {
-   steps {
-    // specify Artifactory server
-    rtServer(
-     id: "ARTIFACTORY_SERVER",
-     url: "http://artifactory:8081/artifactory",
-     credentialsId: 'docker-login'
-    )
-    // specify the repositories to be used for deploying the artifacts in the Artifactory
-    rtGradleDeployer(
-     id: "GRADLE_DEPLOYER",
-     serverId: "ARTIFACTORY_SERVER",
-     repo: "libs-release-local"
-     //snapshotRepo: "libs-snapshot-local"
-    )
-    // defines the dependencies resolution details
-    rtGradleResolver(
-     id: "GRADLE_RESOLVER",
-     serverId: "ARTIFACTORY_SERVER",
-     repo: "libs-release"
-     //snapshotRepo: "libs-snapshot"
-    )
-   }
-  }
+  stage('Deploy Docker image'){
+            steps {
+                script {
+                    def server = Artifactory.server 'docker-artifactory-server'
+                    def rtDocker = Artifactory.docker server: server
+                    def buildInfo = rtDocker.push('http://vupadh:8081/artifactory/spring-boot-demo:latest', 'docker-local')
+                    //also tried:
+                    //def buildInfo = rtDocker.push('registry-url/docker/image:latest', 'docker') 
+                    //the above results in registry/docker/docker/image..
+                    server.publishBuildInfo buildInfo
+                }
+            }
+        }
  }
 }

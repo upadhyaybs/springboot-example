@@ -66,13 +66,11 @@ pipeline {
    steps {
     echo "-=- push Docker image -=-"
     echo "${ORG_NAME}/${APP_NAME}:latest"
-    withDockerRegistry(credentialsId: 'docker-login', url: 'https://docker.io') {
-     bat "docker login -u upadhyaybs -p Wsx@2020 https://docker.io"
+    withDockerRegistry(credentialsId: 'docker-login', url: 'http://vupadh:8081') {
      bat "docker push ${ORG_NAME}/${APP_NAME}:latest"
     }
    }
   }
-
  }
 
 

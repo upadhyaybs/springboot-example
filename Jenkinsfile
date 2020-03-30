@@ -13,7 +13,7 @@ pipeline {
  }
 
  stages {
-   /*
+  /*
   stage('Git Checkout') {
    steps {
     echo "-=- Checkout Code -=-"
@@ -62,17 +62,17 @@ pipeline {
   }
 */
 
- stage('Deploy Docker image'){
-            steps {
-                script {
-                    def server = Artifactory.server 'docker-login'
-                    def rtDocker = Artifactory.docker server: server
-                    def buildInfo = rtDocker.push('http://vupadh:8081/artifactory/spring-boot-demo:latest', 'docker-local')
-                    //also tried:
-                    //def buildInfo = rtDocker.push('registry-url/docker/image:latest', 'docker') 
-                    //the above results in registry/docker/docker/image..
-                    server.publishBuildInfo buildInfo
-                }
-            }
-        }
-}
+  stage('Deploy Docker image') {
+   steps {
+    script {
+     def server = Artifactory.server 'docker-login'
+     def rtDocker = Artifactory.docker server: server
+     def buildInfo = rtDocker.push('http://vupadh:8081/artifactory/spring-boot-demo:latest', 'docker-local')
+     //also tried:
+     //def buildInfo = rtDocker.push('registry-url/docker/image:latest', 'docker') 
+     //the above results in registry/docker/docker/image..
+     server.publishBuildInfo buildInfo
+    }
+   }
+  }
+ }

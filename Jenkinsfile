@@ -69,7 +69,7 @@ pipeline {
      def buildInfo = Artifactory.newBuildInfo()
      def tagName
      buildInfo.env.capture = true
-     sh "sed -i 's/docker.artifactory/${ARTDOCKER_REGISTRY}/' Dockerfile"
+     //sh "sed -i 's/docker.artifactory/${ARTDOCKER_REGISTRY}/' Dockerfile"
      tagName = "${ARTDOCKER_REGISTRY}/docker-framework:${env.BUILD_NUMBER}"
      println "Docker Framework Build"
      docker.build(tagName)

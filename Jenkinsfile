@@ -68,7 +68,7 @@ pipeline {
  
   stage('Build') {
    steps{
-        
+    script{
                 sh "sed -i 's/docker.artifactory/${ARTDOCKER_REGISTRY}/' Dockerfile"
                 tagName = "${ARTDOCKER_REGISTRY}/docker-framework:${env.BUILD_NUMBER}"
                 println "Docker Framework Build"
@@ -77,7 +77,7 @@ pipeline {
                 buildInfo = rtDocker.push(tagName, REPO, buildInfo)
                 println "Docker Buildinfo"
                 rtServer.publishBuildInfo buildInfo
-
+    }
         
     }
   }

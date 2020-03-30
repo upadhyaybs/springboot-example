@@ -9,11 +9,6 @@ pipeline {
   APP_CONTEXT_ROOT = "/"
   APP_LISTENING_PORT = "8080"
   TEST_CONTAINER_NAME = "ci-${APP_NAME}-${BUILD_NUMBER}"
-  def rtServer = Artifactory.server SERVER_ID
- def rtDocker = Artifactory.docker server: rtServer
- def buildInfo = Artifactory.newBuildInfo()
- def tagName 
-  //buildInfo.env.capture = true
  }
 
  stages {
@@ -65,21 +60,26 @@ pipeline {
    }
   }
 */
- 
+
   stage('Build') {
-   steps{
-    script{
-                sh "sed -i 's/docker.artifactory/${ARTDOCKER_REGISTRY}/' Dockerfile"
-                tagName = "${ARTDOCKER_REGISTRY}/docker-framework:${env.BUILD_NUMBER}"
-                println "Docker Framework Build"
-                docker.build(tagName)
-                println "Docker pushing -->" + tagName + " To " + REPO
-                buildInfo = rtDocker.push(tagName, REPO, buildInfo)
-                println "Docker Buildinfo"
-                rtServer.publishBuildInfo buildInfo
+   steps {
+    script {
+     def rtServer = Artifactory.server SERVER_ID
+     def rtDocker = Artifactory.docker server: rtServer
+     def buildInfo = Artifactory.newBuildInfo()
+     def tagName
+     //buildInfo.env.capture = true
+     sh "sed -i 's/docker.artifactory/${ARTDOCKER_REGISTRY}/' Dockerfile"
+     tagName = "${ARTDOCKER_REGISTRY}/docker-framework:${env.BUILD_NUMBER}"
+     println "Docker Framework Build"
+     docker.build(tagName)
+     println "Docker pushing -->" + tagName + " To " + REPO
+     buildInfo = rtDocker.push(tagName, REPO, buildInfo)
+     println "Docker Buildinfo"
+     rtServer.publishBuildInfo buildInfo
     }
-        
-    }
+
+   }
   }
-  }
+ }
 }

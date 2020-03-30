@@ -65,7 +65,7 @@ pipeline {
    steps {
     script {
      def rtServer = Artifactory.server SERVER_ID
-     def rtDocker = Artifactory.docker server: rtServer
+     def rtDocker = Artifactory.docker server: rtServer, host: "tcp://vupadh:8081"
      // Create an Artifactory Docker instance, using your Artifactory username and password:
      //def rtDocker = Artifactory.docker username: 'admin', password: 'Wsx@2020'
      def buildInfo = Artifactory.newBuildInfo()

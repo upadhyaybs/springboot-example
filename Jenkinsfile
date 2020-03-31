@@ -9,7 +9,7 @@ pipeline {
   APP_CONTEXT_ROOT = "/"
   APP_LISTENING_PORT = "8080"
   TEST_CONTAINER_NAME = "ci-${APP_NAME}-${BUILD_NUMBER}"
-  DOCKER_HOST = "tcp://192.168.254.74:2375"
+  DOCKER_HOST = "tcp://192.168.254.74:8080"
  }
 
  stages {

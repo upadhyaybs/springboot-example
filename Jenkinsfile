@@ -74,7 +74,7 @@ pipeline {
      println "Docker Framework Build"
      docker.build(tagName)
      println "Docker pushing -->" + tagName + " To " + "${REPO}"
-     buildInfo = rtDocker.push(tagName)
+     buildInfo = rtDocker.push(tagName,"")
      println "Docker Buildinfo"
      rtServer.publishBuildInfo buildInfo
     }

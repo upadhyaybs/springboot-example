@@ -66,7 +66,7 @@ pipeline {
    steps {
     script {
      def rtServer = Artifactory.server SERVER_ID
-     def rtDocker = Artifactory.docker server: rtServer , host: "tcp://192.168.254.74:8081"
+     def rtDocker = Artifactory.docker server: rtServer //, host: "tcp://192.168.254.74:8081"
      def buildInfo = Artifactory.newBuildInfo()
      def tagName
      buildInfo.env.capture = true

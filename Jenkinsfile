@@ -3,6 +3,9 @@
 @Library('jenkins-shared-lib@master') _  
 
 deliveryPipeline{
+	appName = 'spring-boot-demo'
+	ARTDOCKER_REGISTRY='${ARTDOCKER_REGISTRY}'
+	DOCKER_REPO ='${DOCKER_REPO}'
     branch = '${branch}'
     gitUrl = '${gitUrl}'
     command = './gradlew clean build -DskipTests=true'

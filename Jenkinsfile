@@ -13,7 +13,7 @@ pipeline {
  }
 
  stages {
-  /*
+  
   stage('Git Checkout') {
    steps {
     echo "-=- Checkout Code -=-"
@@ -42,25 +42,6 @@ pipeline {
     jacoco()
    }
   }
-
-  stage('Build Docker image') {
-   steps {
-    echo "-=- build Docker image -=-"
-    bat "docker build -t ${APP_NAME}:${APP_VERSION} ."
-   }
-  }
-
- 
-  stage('Docker Image Tag') {
-   steps {
-    echo "-=- Create Docker image Tag -=-"
-    echo "${ORG_NAME}/${APP_NAME}:${APP_VERSION}"
-    withDockerRegistry(credentialsId: 'docker-login', url: 'https://docker.io') {
-     bat "docker tag ${APP_NAME}:${APP_VERSION} ${ORG_NAME}/${APP_NAME}:latest"
-    }
-   }
-  }
-*/
 
   stage('Build') {
    steps {

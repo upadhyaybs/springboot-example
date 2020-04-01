@@ -1,5 +1,20 @@
 #!groovy
 
+@Library('jenkins-shared-lib@master') _  
+
+deliveryPipeline{
+    branch = '${branch}'
+    gitUrl = '${gitUrl}'
+    command = './gradlew clean build -DskipTests=true'
+    email = 'team@example.com'
+    serverPort = '8080'
+    developmentServer = 'dev-myproject.mycompany.com'
+    stagingServer = 'staging-myproject.mycompany.com'
+    productionServer = 'production-myproject.mycompany.com'
+}
+
+
+/*
 pipeline {
  agent any
  environment {
@@ -58,3 +73,5 @@ pipeline {
   }
  }
 }
+
+*/

@@ -4,10 +4,12 @@
 
 deliveryPipeline{
 	appName = 'spring-boot-demo'
-	ARTDOCKER_REGISTRY='192.168.254.74:8081'
-	DOCKER_REPO ='spring-boot-demo-docker'
-    branch = '${branch}'
-    gitUrl = '${gitUrl}'
+	//ARTDOCKER_REGISTRY='192.168.254.74:8081'
+	//DOCKER_REPO ='spring-boot-demo-docker'
+	ARTDOCKER_REGISTRY='${params.ARTDOCKER_REGISTRY}'
+	DOCKER_REPO ='${params.REPO}'
+    branch = '${params.branch}'
+    gitUrl = '${params.gitUrl}'
     command = './gradlew clean build -DskipTests=true'
     unitTestCommand = './gradlew test'
     unitTestResultPath= 'build/test-results/test/*.xml'

@@ -8,6 +8,7 @@ plugins {
     id 'org.springframework.boot' version '2.2.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'jacoco'
+	id "org.owasp.dependencycheck" version "5.3.2.1"
 }
 
 group = 'com.bsu'
@@ -16,11 +17,20 @@ description = 'spring-boot-demo'
 sourceCompatibility = '1.8'
 
 
-repositories {
- 	mavenCentral()
-    mavenLocal()
-   
+buildscript {
+	repositories {
+		mavenCentral()
+		mavenLocal()
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+	dependencies {
+		classpath "org.owasp:dependency-check-gradle:5.3.2.1"
+	}
 }
+
+apply plugin: "org.owasp.dependencycheck"
 
 configurations {
     developmentOnly

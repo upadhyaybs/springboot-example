@@ -4,16 +4,12 @@
 
 deliveryPipeline{
 	appName = 'spring-boot-demo'
-	//ARTDOCKER_REGISTRY='192.168.254.74:8081'
-	//DOCKER_REPO ='spring-boot-demo-docker'
-	ARTDOCKER_REGISTRY='${params.ARTDOCKER_REGISTRY}'
-	DOCKER_REPO ='${params.REPO}'
-    branch = '${params.branch}'
-    gitUrl = '${params.gitUrl}'
+    branch = env.BRANCH_NAME
     command = './gradlew clean build -DskipTests=true'
     unitTestCommand = './gradlew test'
     unitTestResultPath= 'build/test-results/test/*.xml'
     codeCoverageCommand = './gradlew jacocoTestReport'
+    dependencyCheckCommand='./gradlew dependencyCheckAnalyze'
     email = 'team@example.com'
     serverPort = '8080'
     developmentServer = 'dev-myproject.mycompany.com'
@@ -31,34 +27,6 @@ pipeline {
 
  stages {
   
-  stage('Git Checkout') {
-   steps {
-    echo "-=- Checkout Code -=-"
-    // Get some code from a GitHub repository
-    git credentialsId: 'git-creds', url: 'https://github.com/upadhyaybs/spring-boot-demo.git'
-   }
-  }
-
-  stage('Compile') {
-   steps {
-    echo "-=- compiling project -=-"
-    bat "./gradlew clean build"
-   }
-  }
-
-  stage('Unit tests') {
-   steps {
-    echo "-=- execute unit tests -=-"
-    bat "./gradlew test"
-    junit 'build/test-results/test/*.xml'
-   }
-  }
-  stage('JaCoCo') {
-   steps {
-    echo "-=- Code Coverage -=-"
-    jacoco()
-   }
-  }
 
   stage('Build') {
    steps {

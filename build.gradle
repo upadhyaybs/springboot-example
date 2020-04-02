@@ -3,11 +3,11 @@
  */
 
 plugins {
-    id 'java'
-    id 'maven-publish'
-    id 'org.springframework.boot' version '2.2.5.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-    id 'jacoco'
+	id 'java'
+	id 'maven-publish'
+	id 'org.springframework.boot' version '2.2.5.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'jacoco'
 	id "org.owasp.dependencycheck" version "5.3.2.1"
 }
 
@@ -16,45 +16,44 @@ version = '1.0-SNAPSHOT'
 description = 'spring-boot-demo'
 sourceCompatibility = '1.8'
 
+apply plugin: "org.owasp.dependencycheck"
+apply plugin: "java"
+apply plugin: "org.springframework.boot"
+apply plugin: "jacoco"
+apply plugin: "io.spring.dependency-management"
 
-buildscript {
-	repositories {
-		mavenCentral()
-		mavenLocal()
-		maven {
-			url "https://plugins.gradle.org/m2/"
-		}
-	}
-	dependencies {
-		classpath "org.owasp:dependency-check-gradle:5.3.2.1"
+repositories {
+	mavenCentral()
+	mavenLocal()
+	maven {
+		url "https://plugins.gradle.org/m2/"
 	}
 }
 
-apply plugin: "org.owasp.dependencycheck"
 
 configurations {
-    developmentOnly
-    runtimeClasspath {
-        extendsFrom developmentOnly
-    }
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.projectlombok:lombok:1.18.6'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.projectlombok:lombok:1.18.6'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 
 test {
-    useJUnitPlatform()
+	useJUnitPlatform()
 }
 
 jacocoTestReport {
-    reports {
-        xml.enabled false
-        html.enabled true
-    }
+	reports {
+		xml.enabled false
+		html.enabled true
+	}
 }

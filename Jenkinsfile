@@ -4,7 +4,6 @@
 
 deliveryPipeline{
 	appName = 'spring-boot-demo'
-    branch = env.BRANCH_NAME
     command = './gradlew clean build -DskipTests=true'
     unitTestCommand = './gradlew test'
     unitTestResultPath= 'build/test-results/test/*.xml'

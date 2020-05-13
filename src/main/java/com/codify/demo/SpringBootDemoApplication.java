@@ -1,4 +1,4 @@
-package com.bsu.demo;
+package com.codify.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

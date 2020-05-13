@@ -1,4 +1,4 @@
-package com.bsu.demo.controller;
+package com.codify.demo.controller;
 
 import java.util.Date;
 

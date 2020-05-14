@@ -35,7 +35,7 @@ Example:
 
 ### Test the application 
 
-Enter the below url in browser it should print the message 
+Enter the below url in browser and you should get the response back
 
 ```
 http://localhost:8080/greetings

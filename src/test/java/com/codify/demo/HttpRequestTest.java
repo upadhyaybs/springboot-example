@@ -1,4 +1,4 @@
-package com.bsu.demo;
+package com.codify.demo;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,13 +21,13 @@ public class HttpRequestTest {
 
 	@Test
 	public void greetingShouldReturnDefaultMessage() throws Exception {
-		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/demo/message",
-				String.class)).contains("Hello !! This is Spring Boot Demo App");
+		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/greetings",
+				String.class)).contains("Hello ! This is Spring Boot Demo App.");
 	}
 	
 	@Test
 	public void sayHelloTest() throws Exception {
-		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "demo/hello?name=TestUser",
+		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/greetings/hello?name=TestUser",
 				String.class)).contains("Hi TestUser");
 	}
 }

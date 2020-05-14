@@ -1,4 +1,4 @@
-package com.bsu.demo.controller;
+package com.codify.demo.controller;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -14,20 +14,20 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class DemoControllerTest {
+public class GreetingsControllerTest {
 	
 	@Autowired
 	private MockMvc mockMvc;
 
 	@Test
 	public void shouldReturnDefaultMessage() throws Exception {
-		this.mockMvc.perform(get("/demo/message")).andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString("Hello !! This is Spring Boot Demo App")));
+		this.mockMvc.perform(get("/greetings")).andDo(print()).andExpect(status().isOk())
+				.andExpect(content().string(containsString("Hello ! This is Spring Boot Demo App.")));
 	}
 	
 	@Test
 	public void getMessageTest() throws Exception {
-		this.mockMvc.perform(get("/demo/hello?name=TestUser"))
+		this.mockMvc.perform(get("/greetings/hello?name=TestUser"))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(content().string(containsString("Hi TestUser")));
 	}

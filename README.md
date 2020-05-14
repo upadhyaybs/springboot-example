@@ -18,7 +18,7 @@ java  -Dspring.profiles.active=dev -jar build/libs/*.jar
 
 Execute the following command to build docker image 
 
-./gradlew jibDockerBuild --image= <dockerhub id>/<image-name>
+./gradlew jibDockerBuild --image= dockerhub-id/image-name
 
 Example:
 
@@ -27,7 +27,7 @@ Example:
 
 ### Push the image to docker registry
 
-./gradlew jib --image= <dockerhub id>/<image-name>
+./gradlew jib --image=dockerhub-id/image-name
 
 Example:
 

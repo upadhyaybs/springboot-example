@@ -9,8 +9,6 @@ deliveryPipeline{
     unitTestResultPath= 'build/test-results/test/*.xml'
     codeCoverageCommand = './gradlew jacocoTestReport'
     dependencyCheckCommand='./gradlew dependencyCheckAnalyze'
-    //email = 'team@example.com'
-    //serverPort = '8080'
     //developmentServer = 'dev-myproject.mycompany.com'
     //stagingServer = 'staging-myproject.mycompany.com'
     //productionServer = 'production-myproject.mycompany.com'

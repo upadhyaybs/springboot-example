@@ -14,22 +14,22 @@ gradle clean build
 ### Run application 
 java  -Dspring.profiles.active=dev -jar build/libs/*.jar
 
-##Running as docker image 
+### Running as docker image 
 
 Execute the following command to build docker image 
 
-./gradlew jibDockerBuild --image=<dockerhub id>/<image-name>
+./gradlew jibDockerBuild --image= <dockerhub id>/<image-name>
 
-ex:
+Example:
 
 ./gradlew jibDockerBuild --image=johndoe/spring-boot-demo
 
 
 ### Push the image to docker registry
 
-./gradlew jib --image=<dockerhub id>/<image-name>
+./gradlew jib --image= <dockerhub id>/<image-name>
 
-ex:
+Example:
 
 ./gradlew jib --image=johndoe/spring-boot-demo
 
@@ -37,11 +37,11 @@ ex:
 
 Enter the below url in browser it should print the message 
 
-``
+''
 http://localhost:8080/greetings
 
 Output:
 
 Hello ! This is Spring Boot Demo App.
-``
+''
 

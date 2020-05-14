@@ -2,9 +2,9 @@
 
 -This is simple spring boot demo app with Rest Service Controller. This app can be deployed/run as docker image as well.
 
-###Build App
+### Build App
 
-You must have gradle installed and set GRADLE_HOME environment variable.
+You must have gradle installed (https://gradle.org/install/ ) and set GRADLE_HOME environment variable.
 
 Run the following command to build the app from the source code directory
 
@@ -37,11 +37,11 @@ Example:
 
 Enter the below url in browser it should print the message 
 
-''
+```
 http://localhost:8080/greetings
 
 Output:
 
 Hello ! This is Spring Boot Demo App.
-''
+```
 

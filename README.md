@@ -14,7 +14,7 @@ gradle clean build
 ### Run application 
 java  -Dspring.profiles.active=dev -jar build/libs/*.jar
 
-### Running as docker image 
+### Run as docker image 
 
 Execute the following command to build docker image 
 

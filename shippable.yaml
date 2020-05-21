@@ -5,4 +5,4 @@ jdk:
   
 build:
   ci:
-    - mvn clean install -DskipTests=true
+    - gradle assemble

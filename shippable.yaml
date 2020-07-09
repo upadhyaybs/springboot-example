@@ -11,5 +11,5 @@ build:
   ci:
     - sdk use gradle 6.3
     - gradle assemble
-  on_success:
-    - git push -f git@heroku.com:$APP_NAME.git master
+ #on_success:
+ #   - git push -f git@heroku.com:$APP_NAME.git master

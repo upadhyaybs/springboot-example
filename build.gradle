@@ -16,17 +16,17 @@
 plugins {
 	id 'java'
 	id 'maven-publish'
-	id 'org.springframework.boot' version '2.3.1.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'org.springframework.boot' version '2.5.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'jacoco'
 	id "org.owasp.dependencycheck" version "5.3.2.1"
 	id 'com.google.cloud.tools.jib' version '1.8.0'
 }
 
 group = 'com.codify'
-version = '1.0-SNAPSHOT'
+version = '0.0.1-SNAPSHOT'
 description = 'spring-boot-demo'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 apply plugin: "org.owasp.dependencycheck"
 apply plugin: "java"
@@ -34,6 +34,7 @@ apply plugin: "org.springframework.boot"
 apply plugin: "jacoco"
 apply plugin: "io.spring.dependency-management"
 apply plugin: 'com.google.cloud.tools.jib'
+apply plugin: 'groovy'
 
 repositories {
 	mavenCentral()
@@ -41,10 +42,6 @@ repositories {
 	maven {
 		url "https://plugins.gradle.org/m2/"
 	}
-}
-
-ext {
-	set('springCloudVersion', "Hoxton.SR1")
 }
 
 configurations {
@@ -57,10 +54,10 @@ configurations {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.3.RELEASE'
-	implementation 'org.projectlombok:lombok:1.18.6'
+	implementation 'org.spockframework:spock-core:2.0-M3-groovy-3.0'
+	implementation 'org.spockframework:spock-spring:2.0-M3-groovy-3.0'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+	testImplementation('org.springframework.boot:spring-boot-starter-test'){
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }

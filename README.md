@@ -1,4 +1,4 @@
-# spring-boot-demo
+# springboot-demo
 
 -This is simple spring boot demo app with Rest Service Controller. This app can be deployed/run as docker image as well.
 
